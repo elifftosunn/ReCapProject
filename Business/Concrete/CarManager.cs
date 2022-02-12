@@ -7,22 +7,48 @@ using System.Text;
 
 namespace Business.Concrete
 {
-    public class CarManager: ICarService
+    public class CarManager : ICarService
     {
-        ICarDal CarDal;
+        ICarDal _carDal;
+
         public CarManager(ICarDal carDal)
         {
-            this.CarDal = carDal;
+            this._carDal = carDal;
+        }
+
+        public void Add(Car car)
+        {
+            _carDal.GetAll();
+        }
+
+        public void Delete(Car car)
+        {
+            _carDal.Delete(car);
+        }
+
+        public Car Get(int id)
+        {
+            return _carDal.Get(c => c.Id == id);
         }
 
         public List<Car> GetAll()
         {
-            return CarDal.GetAll();
+            return _carDal.GetAll();
         }
 
-        public List<Car> GetById(int BrandId)
+        public List<Car> GetCarsByBrandId(int brandId)
         {
-            return CarDal.GetById(BrandId);
+            return _carDal.GetAll(c => c.BrandId == brandId);
+        }
+
+        public List<Car> GetCarsByColorId(int colorId)
+        {
+            return _carDal.GetAll(c => c.ColorId == colorId);
+        }
+
+        public void Update(Car car)
+        {
+            _carDal.Update(car);
         }
     }
 }

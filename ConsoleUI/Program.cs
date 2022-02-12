@@ -1,7 +1,10 @@
 ﻿using Business.Concrete;
 using DataAccess.Concrete.InMemory;
+using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ConsoleUI
 {
@@ -9,21 +12,11 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            CarManager carManager = new CarManager(new InMemoryCarDal());
+            
+            CarManager carManager = new CarManager(new EfCarDal());
             CarList(carManager);
-
-            InMemoryCarDal inMemoryCarDal = new InMemoryCarDal();
-            Car car = new Car { Id=6,BrandId=3,ColorId=3,ModelYear=new DateTime(2022,1,1),DailyPrice=7500,Description="BMW Model"};
-            inMemoryCarDal.Add(car);
-            CarList(new CarManager(inMemoryCarDal));
-
-
-            inMemoryCarDal.Delete(car);
-            CarList(new CarManager(inMemoryCarDal));
-
-
-            listingByBrand(new CarManager(inMemoryCarDal),2);
-
+            listingByColor(carManager,1);
+            listingByBrand(carManager, 1);
 
         }
         static void CarList(CarManager carManager)
@@ -39,13 +32,26 @@ namespace ConsoleUI
             }
             Console.WriteLine();
         }
+        static void listingByColor(CarManager carManager,int colorId)
+        {
+            Console.WriteLine();
+            Console.WriteLine("Car Id".PadRight(15) + "Brand Id".PadRight(15) + "Color Id".PadRight(15) + "Model Year".PadRight(15) +
+                "Daily Price".PadRight(15) + "Description");
+            Console.WriteLine("".PadRight(85, '-'));
+            foreach (var car in carManager.GetCarsByColorId(colorId))
+            {
+                Console.WriteLine(car.Id.ToString().PadRight(15) + car.BrandId.ToString().PadRight(15) +
+                    car.ColorId.ToString().PadRight(15) + car.ModelYear.ToString("yyyy").PadRight(15) + car.DailyPrice.ToString().PadRight(15) + car.Description);
+            }
+            Console.WriteLine();
+        }
         static void listingByBrand(CarManager carManager,int brandId)
         {
             Console.WriteLine();
             Console.WriteLine("Car Id".PadRight(15) + "Brand Id".PadRight(15) + "Color Id".PadRight(15) + "Model Year".PadRight(15) +
                 "Daily Price".PadRight(15) + "Description");
             Console.WriteLine("".PadRight(85, '-'));
-            foreach (var car in carManager.GetById(brandId))
+            foreach (var car in carManager.GetCarsByBrandId(brandId))
             {
                 Console.WriteLine(car.Id.ToString().PadRight(15) + car.BrandId.ToString().PadRight(15) +
                     car.ColorId.ToString().PadRight(15) + car.ModelYear.ToString("yyyy").PadRight(15) + car.DailyPrice.ToString().PadRight(15) + car.Description);
