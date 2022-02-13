@@ -5,12 +5,18 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using System.Linq.Expressions;
+using Entities.DTOs;
 
 namespace DataAccess.Concrete.InMemory
 {
     public class InMemoryCarDal : ICarDal
     {
         public void Add(Car car)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<CarDetailDto> CarDetailDto()
         {
             throw new NotImplementedException();
         }

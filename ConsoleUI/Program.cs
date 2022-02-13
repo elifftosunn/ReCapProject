@@ -12,15 +12,27 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            
-            CarManager carManager = new CarManager(new EfCarDal());
-            CarList(carManager);
-            listingByColor(carManager,1);
-            listingByBrand(carManager, 1);
+            //CarList();
+            //listingByColor(1);
+            //listingByBrand(1);
+            CarDetailDto();
 
         }
-        static void CarList(CarManager carManager)
+
+        static void CarDetailDto()
         {
+            CarManager carManager = new CarManager(new EfCarDal());
+            Console.WriteLine("Car Name".PadRight(15) + "Brand Name".PadRight(15) + "Color Name".PadRight(15) + "Daily Price");
+            Console.WriteLine("".PadRight(40, '-'));
+            foreach (var car in carManager.CarDetailDto())
+            {
+                Console.WriteLine(car.CarName.PadRight(15) + car.BrandName + car.ColorName + car.DailyPrice.ToString());
+            }
+        }
+
+        static void CarList()
+        {
+            CarManager carManager = new CarManager(new EfCarDal());
             Console.WriteLine();
             Console.WriteLine("Car Id".PadRight(15)+"Brand Id".PadRight(15)+"Color Id".PadRight(15)+"Model Year".PadRight(15)+
                 "Daily Price".PadRight(15)+ "Description");
@@ -32,8 +44,9 @@ namespace ConsoleUI
             }
             Console.WriteLine();
         }
-        static void listingByColor(CarManager carManager,int colorId)
+        static void listingByColor(int colorId)
         {
+            CarManager carManager = new CarManager(new EfCarDal());
             Console.WriteLine();
             Console.WriteLine("Car Id".PadRight(15) + "Brand Id".PadRight(15) + "Color Id".PadRight(15) + "Model Year".PadRight(15) +
                 "Daily Price".PadRight(15) + "Description");
@@ -45,8 +58,9 @@ namespace ConsoleUI
             }
             Console.WriteLine();
         }
-        static void listingByBrand(CarManager carManager,int brandId)
+        static void listingByBrand(int brandId)
         {
+            CarManager carManager = new CarManager(new EfCarDal());
             Console.WriteLine();
             Console.WriteLine("Car Id".PadRight(15) + "Brand Id".PadRight(15) + "Color Id".PadRight(15) + "Model Year".PadRight(15) +
                 "Daily Price".PadRight(15) + "Description");
