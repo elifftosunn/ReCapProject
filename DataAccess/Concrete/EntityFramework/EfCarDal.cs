@@ -13,13 +13,11 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class EfCarDal : EfEntityRepositoryBase<Car, NorthwindContext>, ICarDal
     {
-        ICarDal _carDal;
-
         public List<CarDetailDto> CarDetailDto()
         {
             using (NorthwindContext context=new NorthwindContext())
             {
-                var result = from c in context.Car
+                var result = from c in context.Cars
                              join b in context.Brand
                              on c.BrandId equals b.BrandId
                              join C in context.Color
@@ -34,16 +32,6 @@ namespace DataAccess.Concrete.EntityFramework
                 return result.ToList();
 
             }
-        }
-
-        public List<Car> GetCarsByBrandId(int brandId)
-        {
-            return _carDal.GetAll(c => c.BrandId == brandId);
-        }
-
-        public List<Car> GetCarsByColorId(int colorId)
-        {
-            return _carDal.GetAll(c => c.ColorId == colorId);
         }
     }
 }

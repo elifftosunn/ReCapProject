@@ -1,0 +1,7 @@
+﻿INSERT INTO [dbo].[Car] ([Id], [BrandId], [ColorId], [ModelYear], [DailyPrice], [Description]) VALUES (1, 1, 1, N'2021-10-30', 8000, N'Audi Model')
+INSERT INTO [dbo].[Car] ([Id], [BrandId], [ColorId], [ModelYear], [DailyPrice], [Description]) VALUES (2, 1, 2, N'2020-01-15', 9000, N'Alfa Romeo')
+INSERT INTO [dbo].[Car] ([Id], [BrandId], [ColorId], [ModelYear], [DailyPrice], [Description]) VALUES (3, 2, 2, N'2019-10-28', 10000, N'Aston     ')
+INSERT INTO [dbo].[Car] ([Id], [BrandId], [ColorId], [ModelYear], [DailyPrice], [Description]) VALUES (4, 3, 2, N'2017-04-05', 11000, N'Audi      ')
+INSERT INTO [dbo].[Car] ([Id], [BrandId], [ColorId], [ModelYear], [DailyPrice], [Description]) VALUES (5, 3, 3, N'2019-07-24', 12000, N'Bentley   ')
+INSERT INTO [dbo].[Car] ([Id], [BrandId], [ColorId], [ModelYear], [DailyPrice], [Description]) VALUES (6, 4, 3, N'2022-05-07', 13000, N'BMW       ')
+INSERT INTO [dbo].[Car] ([Id], [BrandId], [ColorId], [ModelYear], [DailyPrice], [Description]) VALUES (7, 4, 3, N'2022-04-05', 14000, N'Bugatti   ')
