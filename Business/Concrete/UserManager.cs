@@ -19,7 +19,11 @@ namespace Business.Concrete
         }
         public IResult Add(Users user)
         {
-           _userDal.Add(user);
+            if(user.FirstName == ""  || user.FirstName.Length<2 || user.LastName == "" || user.LastName.Length<2 || user.Password.Length<3)
+            {
+                return new ErrorResult(Messages.NameInvalid);
+            }
+            _userDal.Add(user);
             return new SuccessResult(Messages.Added);
 
         }
@@ -48,6 +52,10 @@ namespace Business.Concrete
         public IDataResult<List<UserDetailDto>> GetUserDetails()
         {
             return new SuccessDataResult<List<UserDetailDto>>();
+        }
+        public IDataResult<Users> GetByMail(string email)
+        {
+            return new SuccessDataResult<Users>(_userDal.Get(u => u.Email == email));
         }
     }
 }

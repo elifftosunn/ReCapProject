@@ -33,19 +33,19 @@ namespace Business.Concrete
             {
                 return new ErrorResult(Messages.NameInvalid);
             }
-            _brandDal.Add(brand);
-            return new SuccessResult(Messages.Updated);
+            _brandDal.Delete(brand);
+            return new SuccessResult(Messages.Deleted);
         }
 
         public IDataResult<List<Brand>> GetAll()
         {
-            return new SuccessDataResult<List<Brand>>(_brandDal.GetAll());
+            return new SuccessDataResult<List<Brand>>(_brandDal.GetAll(),Messages.CarListed);
         }
 
         public IResult Update(Brand brand)
         {
             _brandDal.Update(brand);
-            return new SuccessResult();
+            return new SuccessResult(Messages.Updated);
         }
     }
 }

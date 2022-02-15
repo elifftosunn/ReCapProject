@@ -12,6 +12,7 @@ namespace Business.Constants
         public static string MaintenanceTime = "Sistem Bakımda";
         public static string NameInvalid = "Ürün ismi geçersiz";
         public static string RentedCar = "Araba Kirada !!!";
+        public static string CarListed = "Araçlar Listelendi !!!";
 
     }
 }

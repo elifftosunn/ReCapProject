@@ -15,5 +15,6 @@ namespace Business.Abstract
         IResult Update(Users user);
         IDataResult<Users> Get(int id);
         IDataResult<List<UserDetailDto>> GetUserDetails();
+        IDataResult<Users> GetByMail(string email);
     }
 }

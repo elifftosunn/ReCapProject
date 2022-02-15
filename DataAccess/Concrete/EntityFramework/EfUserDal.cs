@@ -13,7 +13,6 @@ namespace DataAccess.Concrete.EntityFramework
         /*
         public List<UserDetailDto> GetUserDetails()
         {
-            
             using (NorthwindContext context=new NorthwindContext())
             {
                 var result=from u in context.Users
