@@ -24,28 +24,28 @@ namespace Business.Concrete
                 new ErrorResult(Messages.NameInvalid);   
             }
             _brandDal.Add(brand);
-            return new SuccessResult(Messages.Added);
+            return new SuccessResult(Messages.brandAdded);
         }
 
         public IResult Delete(Brand brand)
         {
-            if (brand.BrandName == "")
+            if (brand.BrandName == "" && brand.BrandName.Length<3)
             {
                 return new ErrorResult(Messages.NameInvalid);
             }
             _brandDal.Delete(brand);
-            return new SuccessResult(Messages.Deleted);
+            return new SuccessResult(Messages.brandDeleted);
         }
 
         public IDataResult<List<Brand>> GetAll()
         {
-            return new SuccessDataResult<List<Brand>>(_brandDal.GetAll(),Messages.CarListed);
+            return new SuccessDataResult<List<Brand>>(_brandDal.GetAll(),Messages.brandListed);
         }
 
         public IResult Update(Brand brand)
         {
             _brandDal.Update(brand);
-            return new SuccessResult(Messages.Updated);
+            return new SuccessResult(Messages.brandUpdated);
         }
     }
 }

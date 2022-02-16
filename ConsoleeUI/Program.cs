@@ -19,17 +19,26 @@ namespace ConsoleeUI
             //listingByColor(2);
             //listingByBrand(1);
 
-            
-            CarManager carManager = new CarManager(new EfCarDal());
-            //carManager.Add(new Car { Id = 8, BrandId = 2, ColorId = 1, DailyPrice = 8000, Description = "a", ModelYear = new DateTime(2020,10,5) });      +
+
+            //CarManager carManager = new CarManager(new EfCarDal());
+            //carManager.Add(new Car { Id = 9, BrandId = 2, ColorId = 2, DailyPrice = 9000, Description = "a", ModelYear = new DateTime(2020,10,5) });      
             //carManager.Add(new Car { Id = 8, BrandId = 2, ColorId = 1, DailyPrice = 8000, Description = "ABC", ModelYear = new DateTime(2020,10,5) });      +
-            CarList();
+            //CarList();
+
 
 
             UserManager userManager = new UserManager(new EfUserDal());
-            //userManager.Add(new Users { Id=9,FirstName="",LastName="",Email="info@gmail.com",Password="13"});         +
-            //userManager.Add(new Users { Id=9,FirstName="",LastName="",Email="info@gmail.com",Password="13dgd53"});    +
-            //userManager.Add(new Users { Id =10,FirstName="A",LastName="B",Email="info@gmail.com",Password="13dgd53"});  +
+            //userManager.Add(new Users { Id = 11, FirstName = "Deniz", LastName = "Ay", Email = "deniz@gmail.com", Password = "12345" });  
+            //userManager.Update(new Users { Id = 7, FirstName = "Deniz", LastName = "Ay", Email = "deniz@gmail.com", Password = "12345" });  
+            userManager.Delete(new User {UserId = 8, FirstName = "A", LastName = "", Email = "info@gmail.com", Password = "134" });    
+            //userManager.Update(new Users { Id = 10, FirstName = "Selen", LastName = "Ay", Email = "selen@gmail.com", Password = "12345678" });
+
+            foreach (var user in userManager.GetAll().Data)
+            {
+                Console.WriteLine(user.UserId + "  " + user.FirstName + " " + user.LastName + " " + user.Email + "  " + user.Password);
+            }
+
+
         }
 
         private static void UserActions()
@@ -38,11 +47,11 @@ namespace ConsoleeUI
             //userManager.Add(new Users { Id = 6, FirstName = "Deniz", LastName = "Ay", Email = "deniz@gmail.com", Password = "12345" });  +
             //userManager.Add(new Users { Id = 7, FirstName = "Deniz", LastName = "Ay", Email = "deniz@gmail.com", Password = "12345" });  +
             //userManager.Delete(new Users { Id = 7, FirstName = "Deniz", LastName = "Ay", Email = "deniz@gmail.com", Password = "12345" });  +  
-            userManager.Update(new Users { Id = 6, FirstName = "Selen", LastName = "Ay", Email = "selen@gmail.com", Password = "12345678" });
+            userManager.Update(new User { UserId = 6, FirstName = "Selen", LastName = "Ay", Email = "selen@gmail.com", Password = "12345678" });
 
             foreach (var user in userManager.GetAll().Data)
             {
-                Console.WriteLine(user.Id + "  " + user.FirstName + " " + user.LastName + " " + user.Email + "  " + user.Password);
+                Console.WriteLine(user.UserId + "  " + user.FirstName + " " + user.LastName + " " + user.Email + "  " + user.Password);
             }
         }
         private static void UserTest()
@@ -107,7 +116,7 @@ namespace ConsoleeUI
                 Console.WriteLine("".PadRight(85, '-'));
                 foreach (var car in result.Data)
                 {
-                    Console.WriteLine(car.Id.ToString().PadRight(15) + car.BrandId.ToString().PadRight(15) +
+                    Console.WriteLine(car.CarId.ToString().PadRight(15) + car.BrandId.ToString().PadRight(15) +
                         car.ColorId.ToString().PadRight(15) + car.ModelYear.ToString("yyyy").PadRight(15) + car.DailyPrice.ToString().PadRight(15) + car.Description);
                 }
             }
@@ -130,7 +139,7 @@ namespace ConsoleeUI
                 Console.WriteLine("".PadRight(85, '-'));
                 foreach (var car in carManager.GetCarsByColorId(colorId).Data)
                 {
-                    Console.WriteLine(car.Id.ToString().PadRight(15) + car.BrandId.ToString().PadRight(15) +
+                    Console.WriteLine(car.CarId.ToString().PadRight(15) + car.BrandId.ToString().PadRight(15) +
                         car.ColorId.ToString().PadRight(15) + car.ModelYear.ToString("yyyy").PadRight(15) + car.DailyPrice.ToString().PadRight(15) + car.Description);
                 }
             }
@@ -153,7 +162,7 @@ namespace ConsoleeUI
                 Console.WriteLine("".PadRight(85, '-'));
                 foreach (var car in carManager.GetCarsByBrandId(brandId).Data)
                 {
-                    Console.WriteLine(car.Id.ToString().PadRight(15) + car.BrandId.ToString().PadRight(15) +
+                    Console.WriteLine(car.CarId.ToString().PadRight(15) + car.BrandId.ToString().PadRight(15) +
                         car.ColorId.ToString().PadRight(15) + car.ModelYear.ToString("yyyy").PadRight(15) + car.DailyPrice.ToString().PadRight(15) + car.Description);
                 }
             }
