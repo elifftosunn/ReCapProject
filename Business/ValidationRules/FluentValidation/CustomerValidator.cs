@@ -11,7 +11,7 @@ namespace Business.ValidationRules.FluentValidation
         public CustomerValidator()
         {
             RuleFor(c => c.CompanyName).NotEmpty().MinimumLength(2)
-                .WithMessage("Şirket adı min 2 karakter uzunluğunda olmalıdır.");  
+                .WithMessage("The company name must be at least 2 characters long.");  
         }
     }
 }
