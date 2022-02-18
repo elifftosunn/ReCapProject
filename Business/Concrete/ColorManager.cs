@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -17,12 +19,9 @@ namespace Business.Concrete
             this._colorDal = colorDal;
         }
 
+        [ValidationAspect(typeof(ColorValidator))]
         public IResult Add(Color color)
         {
-            if (color.ColorName.Length < 2)
-            {
-                return new ErrorResult(Messages.NameInvalid);
-            }
             _colorDal.Add(color);
             return new SuccessResult(Messages.colorAdded);
         }
@@ -42,7 +41,7 @@ namespace Business.Concrete
             }
             return new ErrorDataResult<List<Color>>(Messages.isNotId);
         }
-
+        [ValidationAspect(typeof(CarValidator))]
         public IResult Update(Color color)
         {
             _colorDal.Update(color);

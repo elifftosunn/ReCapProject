@@ -1,5 +1,8 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
+using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -19,20 +22,12 @@ namespace Business.Concrete
             this._carDal = carDal;
         }
 
+        [ValidationAspect(typeof(CarValidator))] //ADD methodunu doğrula CarValidator kurallarına göre
         public IResult Add(Car car)
-        {
-            if (DateTime.Now.Hour == 17)
-            {
-                return new ErrorResult(Messages.MaintenanceTime);
-            }
-            if (car.Description.Length < 3)
-            {
-                return new ErrorResult(Messages.NameInvalid);
-            }
+        {   
             _carDal.Add(car);
             return new SuccessResult(Messages.Added);
         }
-
         public IDataResult<List<CarDetailDto>> CarDetailDto()
         {
             var result = _carDal.CarDetailDto();
@@ -45,6 +40,7 @@ namespace Business.Concrete
 
         public IResult Delete(Car car)
         {
+            //ValidationTool.Validate(new CarValidator(), car);
             _carDal.Delete(car);
             return new SuccessResult(Messages.Deleted);
         }
@@ -75,8 +71,10 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.ColorId == colorId));
         }
 
+        [ValidationAspect(typeof(CarValidator))]
         public IResult Update(Car car)
         {
+            ValidationTool.Validate(new CarValidator(), car);
             _carDal.Update(car);
             return new SuccessResult(Messages.Updated);
         }

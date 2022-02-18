@@ -1,10 +1,13 @@
 ﻿using Business.Abstract;
+using Core.Utilities.Interceptors;
 using Entities.Concrete;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace WebAPI.Controllers
@@ -44,23 +47,25 @@ namespace WebAPI.Controllers
         [HttpPost("delete")]
         public IActionResult Delete(Color color)
         {
-            var result = _colorService.Delete(color);
+            var result=_colorService.Delete(color);
             if (result.Success)
             {
                 return Ok(result);
             }
             return BadRequest(result);
         }
+
         [HttpPost("updated")]
-        public IActionResult Updated(Color color)
+        public IActionResult Update(Color color)
         {
-            var result = _colorService.Update(color);
+            var result= _colorService.Update(color);
             if (result.Success)
             {
                 return Ok(result);
             }
-            return BadRequest(result);
+            return BadRequest();
         }
+        
 
     }
 }
