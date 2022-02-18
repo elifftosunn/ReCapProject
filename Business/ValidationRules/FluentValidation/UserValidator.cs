@@ -11,14 +11,14 @@ namespace Business.ValidationRules.FluentValidation
     {
         public UserValidator()
         {
-            RuleFor(u=>u.FirstName).NotEmpty().WithMessage("İsim alanı boş geçilemez!")
-                .Length(4, 20).WithMessage("İsim alanı 4 ile 20 karakter arasında olmalıdır!");
-            RuleFor(u => u.LastName).NotEmpty().WithMessage("Soyisim alanı boş geçilemez.")
-                .Length(4, 20).WithMessage("İsim alanı 4 ile 20 karakter arasında olmalıdır!");
-            RuleFor(u => u.Email).EmailAddress().WithMessage("Geçerli bir e-posta degeri giriniz!")
+            RuleFor(u=>u.FirstName).NotEmpty().WithMessage("The name field cannot be passed blank!")
+                .Length(4, 20).WithMessage("The name field should be between 4 and 20 characters ");
+            RuleFor(u => u.LastName).NotEmpty().WithMessage("The surname field cannot be passed blank.")
+                .Length(4, 20).WithMessage("The surname field should be between 4 and 20 characters");
+            RuleFor(u => u.Email).EmailAddress().WithMessage("Please enter a valid email value!")
                 .When(u => !string.IsNullOrEmpty(u.Email));
-            RuleFor(u => u.Password).NotEmpty().WithMessage("Parola alanı boş geçilemez")
-                .Must(IsPasswordValid).WithMessage("Parolanız en az sekiz karakter, en az bir harf ve bir sayı içermelidir!");
+            RuleFor(u => u.Password).NotEmpty().WithMessage("The password field cannot be passed blank")
+                .Must(IsPasswordValid).WithMessage("Your password must contain at least eight characters, at least one letter and a number!");
         }
 
         private bool IsPasswordValid(string arg)
