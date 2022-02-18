@@ -1,7 +1,7 @@
-﻿using Castle.DynamicProxy; //IInvocation
-using Core.CrossCuttingConcerns.Validation; //ValidationTool.Validate
-using Core.Utilities.Interceptors; //MethodInterception
-using FluentValidation; //IValidator
+﻿using Castle.DynamicProxy; 
+using Core.CrossCuttingConcerns.Validation; 
+using Core.Utilities.Interceptors;
+using FluentValidation; 
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +9,9 @@ using System.Text;
 
 namespace Core.Aspects.Autofac.Validation
 {
-    public class ValidationAspect : MethodInterception //ValidationAspect => ATTRIBUTE
+    public class ValidationAspect : MethodInterception 
     {
-        private Type _validatorType;  //ATTRIBUTE'LERIN TİPİNİ VER DİYORUZ
+        private Type _validatorType;  
         public ValidationAspect(Type validatorType) 
         {
             if (!typeof(IValidator).IsAssignableFrom(validatorType))
@@ -23,9 +23,9 @@ namespace Core.Aspects.Autofac.Validation
         }
         protected override void OnBefore(IInvocation invocation)
         {
-            var validator = (IValidator)Activator.CreateInstance(_validatorType); //Activator.CreateInstance => Çalışma anında yapılan şeyler
-            var entityType = _validatorType.BaseType.GetGenericArguments()[0]; //CarValidator'ın baseType(AbstractValidator)'ını bul onun generic argümanlarından(<T1,T2>) ilkini(Car) bul
-            var entities = invocation.Arguments.Where(t => t.GetType() == entityType); //onun parametrelerini bul ([Add(Car car)] => burada bir parametre var ama birden fazla olabilir) ve entityType(Car)'a eşit olanı 
+            var validator = (IValidator)Activator.CreateInstance(_validatorType); 
+            var entityType = _validatorType.BaseType.GetGenericArguments()[0]; 
+            var entities = invocation.Arguments.Where(t => t.GetType() == entityType); 
             foreach (var entity in entities)
             {
                 ValidationTool.Validate(validator, entity);
