@@ -22,7 +22,7 @@ namespace Business.Concrete
             this._carDal = carDal;
         }
 
-        [ValidationAspect(typeof(CarValidator))] //ADD methodunu doğrula CarValidator kurallarına göre
+        [ValidationAspect(typeof(CarValidator))] 
         public IResult Add(Car car)
         {   
             _carDal.Add(car);
